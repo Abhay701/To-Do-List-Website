@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow | Beautiful Todo List App</title>
+    <link rel="stylesheet" href="styleToDo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-check-double"></i>
+            <span>TaskFlow</span>
+        </div>
+        <button class="mode-toggle" id="modeToggle">
+            <i class="fas fa-moon"></i>
+        </button>
+    </header>
+
+    <div class="container">
+        <!-- Statistics Section -->
+        <div class="stats-card">
+            <div class="stat-item total">
+                <i class="fas fa-tasks"></i>
+                <div class="stat-value" id="totalTasks">0</div>
+                <div class="stat-label">Total Tasks</div>
+            </div>
+            <div class="stat-item completed">
+                <i class="fas fa-check-circle"></i>
+                <div class="stat-value" id="completedTasks">0</div>
+                <div class="stat-label">Completed</div>
+            </div>
+            <div class="stat-item pending">
+                <i class="fas fa-hourglass-half"></i>
+                <div class="stat-value" id="pendingTasks">0</div>
+                <div class="stat-label">Pending</div>
+            </div>
+            <div class="stat-item high-priority">
+                <i class="fas fa-exclamation-circle"></i>
+                <div class="stat-value" id="highPriorityTasks">0</div>
+                <div class="stat-label">High Priority</div>
+            </div>
+        </div>
+
+        <!-- Add Task Card -->
+        <div class="card">
+            <form id="todoForm" class="todo-form">
+                <div class="form-group">
+                    <input type="text" id="todoInput" placeholder="Add a new task..." required>
+                </div>
+                <button type="submit" id="addButton">
+                    <i class="fas fa-plus"></i> Add
+                </button>
+            </form>
+
+            <!-- Search and Filter Toolbar -->
+            <div class="toolbar">
+                <div class="toolbar-section">
+                    <div class="search-container">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" class="search-input" placeholder="Search tasks...">
+                    </div>
+                </div>
+                <div class="toolbar-section">
+                    <select id="sortSelect" class="sort-select">
+                        <option value="dateAdded">Date Added</option>
+                        <option value="priority">Priority</option>
+                        <option value="dueDate">Due Date</option>
+                        <option value="alphabetical">Alphabetical</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="filter-section">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="active">Active</button>
+                <button class="filter-btn" data-filter="completed">Completed</button>
+                <button class="filter-btn" data-filter="high">High Priority</button>
+                <button class="filter-btn" data-filter="starred">Starred</button>
+            </div>
+
+            <!-- Drop Zone for File Import -->
+            <div class="drop-zone" id="dropZone">
+                <i class="fas fa-file-import"></i>
+                <p>Drag & drop a JSON file to import tasks</p>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <!-- Todo List Card -->
+        <div class="card">
+            <div id="todoList" class="todo-list">
+                <!-- Todo items will be added here -->
+                <div class="empty-state" id="emptyState">
+                    <i class="fas fa-clipboard-list"></i>
+                    <h3>No tasks yet</h3>
+                    <p>Add a task to get started</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Abhay | @2025 All rights reserved!</p>
+    </footer>
+
+    <!-- Edit Modal -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Edit Task</h2>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <form id="editForm" class="modal-form">
+                <div class="form-group">
+                    <label class="form-label" for="editTitle">Task Title</label>
+                    <input type="text" id="editTitle" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="editDescription">Description</label>
+                    <textarea id="editDescription"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="editDueDate">Due Date</label>
+                        <input type="date" id="editDueDate">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="editPriority">Priority</label>
+                        <select id="editPriority">
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-buttons">
+                    <button type="submit" class="save-btn">Save</button>
+                    <button type="button" class="cancel-btn" id="cancelEdit">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JS Script -->
+    <script src="scriptToDo.js"></script>
+</body>
+</html>
